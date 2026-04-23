@@ -1,12 +1,17 @@
 // app/(auth)/sign-in/page.jsx  or  components/SignInView.jsx
 "use client";
+import { useAuth } from "../../../../../context/AuthContext";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, Shield, CheckSquare, Square } from "lucide-react";
 import api from "@/lib/axios";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export const SignInViews = () => {
+
+    const { login } = useAuth();
 
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -17,6 +22,8 @@ export const SignInViews = () => {
     const [error, setError] = useState("");
 
     const pathname = usePathname();
+    const router = useRouter();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,12 +34,13 @@ export const SignInViews = () => {
                 { email, password },
                 { withCredentials: true }   // sends the httpOnly cookie
             );
+            login(data.user);  // Update the auth context with the logged-in user
             setMessage(data.message || "Login successful!");
             // redirect based on role
             if (data.user.role === "admin") {
-                window.location.href = "/admin/dashboard";
+                router.push("/admin/dashboard");
             } else {
-                window.location.href = "/dashboard";
+                router.push("/dashboard");
             }
         } catch (err) {
             setError(err.response?.data?.message || "Login failed");
@@ -168,7 +176,7 @@ export const SignInViews = () => {
                             </label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-                                <input
+                                <Input
                                     type="email"
                                     placeholder="name@organization.org"
                                     required
@@ -192,7 +200,7 @@ export const SignInViews = () => {
                             </div>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-                                <input
+                                <Input
                                     type={showPassword ? "text" : "password"}
                                     placeholder="············"
                                     required

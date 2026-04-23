@@ -1,6 +1,7 @@
+// context/AuthContext.jsx
 "use client"
-import { createContext, useContext, useState, useEffect } from 'react'
-import api from '@/lib/axios'
+import { createContext, useContext, useState, useEffect } from "react"
+import api from "@/lib/axios"
 
 const AuthContext = createContext(null)
 
@@ -8,25 +9,56 @@ export function AuthProvider({ children }) {
   const [user, setUser]       = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // On mount — check if a session cookie exists
+  // ── On every page load — check if session cookie is still valid ──
+  // If the cookie exists and is valid, /api/auth/me returns the user.
+  // If expired or missing, it returns 401 and we set user to null.
   useEffect(() => {
-    api.get('/api/auth/me')
+    api.get("/api/auth/me")
       .then(({ data }) => setUser(data))
       .catch(() => setUser(null))
       .finally(() => setLoading(false))
   }, [])
 
+  // ── Called immediately after a successful login ───────────────────
+  // Receives the user object from the sign-in API response
+  const login = (userData) => {
+    setUser(userData)
+  }
+
+  // ── Clears session on both server and client ──────────────────────
   const logout = async () => {
-    await api.post('/api/auth/logout')
-    setUser(null)
-    window.location.href = '/sign-in'
+    try {
+      await api.post("/api/auth/logout")   // clears httpOnly cookie on server
+    } catch {
+      // continue even if request fails
+    } finally {
+      setUser(null)
+      window.location.href = "/sign-in"
+    }
+  }
+
+  const value = {
+    user,                                    // full user object or null
+    loading,                                 // true during initial session check
+    login,                                   // call after successful sign-in
+    logout,                                  // call from navbar or any button
+    isAdmin:  user?.role === "admin",        // quick boolean for conditionals
+    isClient: user?.role === "client",       // quick boolean for conditionals
+    isLoggedIn: !!user,                      // simple truthy check
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout, loading }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export const useAuth = () => useContext(AuthContext)
+// Custom hook — import this instead of useContext(AuthContext) directly
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider")
+  }
+  return context
+}

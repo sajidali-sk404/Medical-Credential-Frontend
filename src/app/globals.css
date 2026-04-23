@@ -49,6 +49,19 @@
 }
 
 :root {
+  --color-background-danger: #fee2e2;
+  --color-text-danger: #dc2626;
+
+  --color-background-success: #dcfce7;
+  --color-text-success: #16a34a;
+
+  --color-background-warning: #fef9c3;
+  --color-text-warning: #ca8a04;
+
+  --color-background-info: #dbeafe;
+  --color-text-info: #2563eb;
+  --color-text-tertiary: #64748b;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -121,9 +134,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
