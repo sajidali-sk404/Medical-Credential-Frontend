@@ -24,7 +24,14 @@ export const SignInViews = () => {
     const pathname = usePathname();
     const router = useRouter();
 
-
+    const LoadClientDemo = () => {
+        setEmail("client@example.com");
+        setPassword("clientpassword");
+    };
+    const LoadAdminDemo = () => {
+        setEmail("admin@example.com");
+        setPassword("adminpassword");
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -224,8 +231,8 @@ export const SignInViews = () => {
                             onClick={() => setKeepSession(!keepSession)}
                         >
                             {keepSession
-                                ? <CheckSquare className="w-4 h-4 text-teal-600 flex-shrink-0" />
-                                : <Square className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                                ? <CheckSquare className="w-4 h-4 text-teal-600 shrink-0" />
+                                : <Square className="w-4 h-4 text-gray-400 shrink-0" />
                             }
                             <span className="text-sm text-gray-600">Keep session active for 30 days</span>
                         </div>
@@ -254,13 +261,13 @@ export const SignInViews = () => {
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
-                            <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
-                                <div className="w-4 h-4 rounded-sm bg-gray-800 flex-shrink-0" />
-                                Workspace
+                            <button onClick={LoadClientDemo} className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                                <div className="w-4 h-4 rounded-sm bg-gray-800 shrink-0" />
+                                Client Demo
                             </button>
-                            <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
-                                <div className="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0" />
-                                Okta ID
+                            <button onClick={LoadAdminDemo} className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+                                <div className="w-4 h-4 rounded-full bg-blue-600 shrink-0" />
+                                Admin Demo
                             </button>
                         </div>
                     </div>
@@ -280,7 +287,7 @@ export const SignInViews = () => {
 
                 {/* System Verified badge — bottom right */}
                 <div className="absolute bottom-6 -mb-12 right-6 flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm">
-                    <div className="w-6 h-6 rounded bg-teal-500 flex items-center justify-center flex-shrink-0">
+                    <div className="w-6 h-6 rounded bg-teal-500 flex items-center justify-center shrink-0">
                         <Shield className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div>
