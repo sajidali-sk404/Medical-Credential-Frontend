@@ -15,9 +15,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => setUser(data))
-      .catch(() => console.log("No active session"))
+      .catch((err) => console.log(err.response?.data))
       .finally(() => {
-        console.log("Cookies:", req.cookies);
         setLoading(false)
       })
   }, [])
