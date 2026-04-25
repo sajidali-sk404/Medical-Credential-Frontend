@@ -13,9 +13,9 @@ export function AuthProvider({ children }) {
   // If the cookie exists and is valid, /api/auth/me returns the user.
   // If expired or missing, it returns 401 and we set user to null.
   useEffect(() => {
-    api.get("/api/auth/me")
+    api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => setUser(data))
-      .catch(() => setUser(null))
+      .catch(() => console.log("No active session"))
       .finally(() => setLoading(false))
   }, [])
 
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
     } catch {
       // continue even if request fails
     } finally {
-      setUser(null)
+      setUser(null)                       // clear user on client
       window.location.href = "/sign-in"
     }
   }

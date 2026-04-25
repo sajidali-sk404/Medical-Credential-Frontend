@@ -43,12 +43,14 @@ export const SignInViews = () => {
             );
             login(data.user);  // Update the auth context with the logged-in user
             setMessage(data.message || "Login successful!");
-            // redirect based on role
-            if (data.user.role === "admin") {
-                router.push("/admin/dashboard");
-            } else {
-                router.push("/dashboard");
-            }
+            // delay to allow cookie to be set
+            setTimeout(() => {
+                if (data.user.role === "admin") {
+                    router.push("/admin/dashboard");
+                } else {
+                    router.push("/dashboard");
+                }
+            }, 200);
         } catch (err) {
             setError(err.response?.data?.message || "Login failed");
         } finally {
