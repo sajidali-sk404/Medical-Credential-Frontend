@@ -1,14 +1,14 @@
 // middleware.js
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 export function middleware(request) {
   // Read the frontend-set cookie (not the httpOnly backend one)
-  const token    = request.cookies.get("token")?.value
+  const token = request.cookies.get("token")?.value
   const { pathname } = request.nextUrl
 
-  const isAuthPage   = pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")
+  const isAuthPage = pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")
   const isClientPage = pathname.startsWith("/dashboard") || pathname.startsWith("/dashboard/requests") || pathname.startsWith("/dashboard/new-request") || pathname.startsWith("/dashboard/support")
-  const isAdminPage  = pathname.startsWith("/admin/dashboard") || pathname.startsWith("/admin/requests") || pathname.startsWith("/admin/users")
+  const isAdminPage = pathname.startsWith("/admin/dashboard") || pathname.startsWith("/admin/requests") || pathname.startsWith("/admin/users")
 
   // Not logged in
   if (!token) {

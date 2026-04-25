@@ -34,42 +34,48 @@ export const SignInViews = () => {
         setPassword("adminpassword");
     };
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
+        e.preventDefault()           // ← stops page reload
+        e.stopPropagation()
+
+        console.log("Submit fired")  // ← check if this appears in console
+        console.log("Email:", email)
+        console.log("API URL:", process.env.NEXT_PUBLIC_API_URL)
+
+        if (!email || !password) {
+            setError("Email and password are required")
+            return
+        }
+
+        setLoading(true)
+        setError("")
+
         try {
-            const { data } = await api.post(
-                "/api/auth/login",
-                { email, password },
-                { withCredentials: true }   // sends the httpOnly cookie
-            );
-            // Store token in a frontend-readable cookie for Next.js middleware
+            console.log("Calling API...")
+            const { data } = await api.post("/api/auth/login", { email, password })
+            console.log("Response:", data)
+
             Cookies.set("token", data.token, {
                 expires: 7,
                 secure: true,
                 sameSite: "None",
-            });
+            })
 
-            login(data.user);  // Update the auth context with the logged-in user
-            setMessage(data.message || "Login successful!");
-            // delay to allow cookie to be set
-            setTimeout(() => {
-                if (data.user.role === "admin") {
-                    router.push("/admin/dashboard");
-                } else {
-                    router.push("/dashboard");
-                }
-            }, 200);
+            login(data.user)
+
+            if (data.user.role === "admin") {
+                window.location.href = "/admin/dashboard"
+            } else {
+                window.location.href = "/dashboard"
+            }
         } catch (err) {
-            console.log("Status:", err.response?.status)
-            console.log("Error:", err.response?.data)
-            console.log("Message:", err.message)
-            setError(err.response?.data?.message || "Login failed");
+            console.log("Full error:", err)
+            console.log("Response status:", err.response?.status)
+            console.log("Response data:", err.response?.data)
+            setError(err.response?.data?.message || err.message || "Login failed")
         } finally {
-            setEmail("");
-            setPassword("");
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     return (
         <div className="flex h-full w-full bg-white ">
