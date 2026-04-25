@@ -2,6 +2,7 @@
 "use client"
 import { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Cookies from "js-cookie"
 import api from "@/lib/axios"
 
 const AuthContext = createContext(null)

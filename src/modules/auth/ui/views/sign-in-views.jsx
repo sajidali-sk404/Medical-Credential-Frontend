@@ -42,14 +42,13 @@ export const SignInViews = () => {
                 { email, password },
                 { withCredentials: true }   // sends the httpOnly cookie
             );
-
             // Store token in a frontend-readable cookie for Next.js middleware
             Cookies.set("token", data.token, {
                 expires: 7,
                 secure: true,
                 sameSite: "None",
             });
-            
+
             login(data.user);  // Update the auth context with the logged-in user
             setMessage(data.message || "Login successful!");
             // delay to allow cookie to be set
