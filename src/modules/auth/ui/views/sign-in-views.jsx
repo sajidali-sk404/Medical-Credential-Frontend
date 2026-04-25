@@ -60,6 +60,9 @@ export const SignInViews = () => {
                 }
             }, 200);
         } catch (err) {
+            console.log("Status:", err.response?.status)
+            console.log("Error:", err.response?.data)
+            console.log("Message:", err.message)
             setError(err.response?.data?.message || "Login failed");
         } finally {
             setEmail("");
