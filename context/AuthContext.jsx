@@ -16,7 +16,10 @@ export function AuthProvider({ children }) {
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => setUser(data))
       .catch(() => console.log("No active session"))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        console.log("Cookies:", req.cookies);
+        setLoading(false)
+      })
   }, [])
 
   // ── Called immediately after a successful login ───────────────────
