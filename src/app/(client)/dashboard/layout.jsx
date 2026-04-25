@@ -18,7 +18,17 @@ export default function ClientLayout({ children }) {
   }, [user, loading, isClient])
 
   // ✅ Only block UI while loading
-  if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (loading) return (
+    <div style={{
+      minHeight:      "100vh",
+      display:        "flex",
+      alignItems:     "center",
+      justifyContent: "center",
+      background:     "#f8faf9",
+    }}>
+      <p style={{ fontSize: 14, color: "#6b8b8b" }}>Loading...</p>
+    </div>
+  )
 
   // ✅ Prevent rendering before redirect happens
   if (!user || !isClient) return null;
