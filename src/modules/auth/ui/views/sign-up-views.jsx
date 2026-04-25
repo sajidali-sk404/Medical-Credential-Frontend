@@ -403,21 +403,6 @@ export const SignUpViews = () => {
                             <div className="absolute inset-0 flex items-center">
                                 <div className="w-full border-t border-gray-200" />
                             </div>
-                            <div className="relative flex justify-center">
-                                <span className="bg-white px-3 text-xs font-semibold text-gray-400 uppercase tracking-widest">
-                                    Enterprise SSO
-                                </span>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                            <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
-                                <div className="w-4 h-4 rounded-sm bg-gray-800 flex-shrink-0" />
-                                Workspace
-                            </button>
-                            <button className="flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
-                                <div className="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0" />
-                                Okta ID
-                            </button>
                         </div>
                     </div>
 

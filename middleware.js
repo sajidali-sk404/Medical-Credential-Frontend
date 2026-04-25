@@ -8,7 +8,7 @@ export function middleware(request) {
 
   const isAuthPage = pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")
   const isClientPage = pathname.startsWith("/dashboard") || pathname.startsWith("/dashboard/requests") || pathname.startsWith("/dashboard/new-request") || pathname.startsWith("/dashboard/support")
-  const isAdminPage = pathname.startsWith("/admin/dashboard") || pathname.startsWith("/admin/requests") || pathname.startsWith("/admin/users")
+  const isAdminPage = pathname.startsWith("/admin/dashboard") || pathname.startsWith("/admin/requests") || pathname.startsWith("/admin/clients")
 
   // Not logged in
   if (!token) {
