@@ -2,6 +2,7 @@
 "use client";
 import { useAuth } from "../../../../../context/AuthContext";
 import { useState } from "react";
+import Cookies from "js-cookie"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, Shield, CheckSquare, Square } from "lucide-react";
@@ -41,6 +42,14 @@ export const SignInViews = () => {
                 { email, password },
                 { withCredentials: true }   // sends the httpOnly cookie
             );
+
+            // Store token in a frontend-readable cookie for Next.js middleware
+            Cookies.set("token", data.token, {
+                expires: 7,
+                secure: true,
+                sameSite: "None",
+            });
+            
             login(data.user);  // Update the auth context with the logged-in user
             setMessage(data.message || "Login successful!");
             // delay to allow cookie to be set

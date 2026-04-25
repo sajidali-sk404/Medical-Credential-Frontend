@@ -1,51 +1,47 @@
-// middleware.js (root of frontend project)
+// middleware.js
 import { NextResponse } from "next/server"
 
 export function middleware(request) {
+  // Read the frontend-set cookie (not the httpOnly backend one)
   const token    = request.cookies.get("token")?.value
   const { pathname } = request.nextUrl
 
-  // ── Not logged in at all ──────────────────────────────────────────
+  const isAuthPage   = pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")
+  const isClientPage = pathname.startsWith("/dashboard") || pathname.startsWith("/requests") || pathname.startsWith("/new-request") || pathname.startsWith("/support")
+  const isAdminPage  = pathname.startsWith("/admin")
+
+  // Not logged in
   if (!token) {
-    if (
-      pathname.startsWith("/dashboard") ||
-      pathname.startsWith("/requests")  ||
-      pathname.startsWith("/admin")
-    ) {
+    if (isClientPage || isAdminPage) {
       return NextResponse.redirect(new URL("/sign-in", request.url))
     }
     return NextResponse.next()
   }
 
-  // ── Decode role from JWT payload (no library needed) ─────────────
-  // JWT is base64: header.payload.signature
-  // We only need the payload (middle part)
+  // Decode role from JWT
   let role = null
   try {
     const payload = JSON.parse(atob(token.split(".")[1]))
-    role = payload.role   // "client" | "admin"
+    role = payload.role
   } catch {
-    // malformed token — send to sign-in
     return NextResponse.redirect(new URL("/sign-in", request.url))
   }
 
-  // ── Client trying to access admin routes ─────────────────────────
-  if (role === "client" && pathname.startsWith("/admin")) {
+  // Client trying admin routes
+  if (role === "client" && isAdminPage) {
     return NextResponse.redirect(new URL("/dashboard", request.url))
   }
 
-  // ── Admin trying to access client routes ─────────────────────────
-  if (role === "admin" && (
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/requests")
-  )) {
+  // Admin trying client routes
+  if (role === "admin" && isClientPage) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url))
   }
 
-  // ── Already logged in, trying to visit sign-in/sign-up ───────────
-  if (pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")) {
-    const redirect = role === "admin" ? "/admin/dashboard" : "/dashboard"
-    return NextResponse.redirect(new URL(redirect, request.url))
+  // Already logged in visiting auth pages
+  if (isAuthPage) {
+    return NextResponse.redirect(
+      new URL(role === "admin" ? "/admin/dashboard" : "/dashboard", request.url)
+    )
   }
 
   return NextResponse.next()
