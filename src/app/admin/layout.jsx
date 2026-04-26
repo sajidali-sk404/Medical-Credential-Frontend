@@ -14,7 +14,7 @@ function LayoutContent({ children }) {
 
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 lg:hidden">
         <Button variant="outline" size="icon" onClick={toggleSidebar}>
           {(state === "collapsed" || isMobile)
             ? <PanelLeftOpenIcon className="size-4" />
