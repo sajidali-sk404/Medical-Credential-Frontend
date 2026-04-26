@@ -38,9 +38,9 @@ export const AdminDashboardSidebar = ({ children }) => {
                 <SidebarHeader>
                     <div className="flex items-center gap-2.5">
                         <div className="w-7 h-7 rounded-md bg-[#1D9E75] flex items-center justify-center">
-                            <span className="text-white text-[13px] font-bold">C</span>
+                            <span className="text-[13px] font-bold">C</span>
                         </div>
-                        <span className="text-white font-semibold text-[15px] tracking-[-0.01em]">
+                        <span className="font-semibold text-[15px] tracking-[-0.01em]">
                             CredFlow
                         </span>
                     </div>
