@@ -10,6 +10,7 @@ import Link from "next/link"
 
 export default function DashboardPage() {
   const { user } = useAuth()
+  const [error, setError] = useState(null)
   const [stats, setStats] = useState({
     total: 0,
     approved: 0,
@@ -28,7 +29,11 @@ export default function DashboardPage() {
     ]).then(([s, r]) => {
       setStats(s.data)
       setRequests(r.data.requests)
-    }).finally(() => setLoading(false))
+    }).catch(err => {
+      console.error("Error fetching dashboard data:", err)
+      setError("Failed to load dashboard data. Please try again.")
+    })   
+    .finally(() => setLoading(false))
   }, [])
   if (loading) return (
     <div style={{ padding: "48px 0", textAlign: "center" }}>
