@@ -56,6 +56,11 @@ export const SignInViews = () => {
             setMessage("Login successful! Redirecting...")
             console.log("User data:", data.user)
             login(data.user)
+            // ✅ Wait a bit so cookie is stored
+            await new Promise((r) => setTimeout(r, 300));
+
+            // ✅ Re-fetch session (ensures cookie works)
+            await api.get("/api/auth/me", { withCredentials: true });
 
 
             if (data.user.role === "admin") {

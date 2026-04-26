@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
       })
       .catch((err) => {
         console.log("No session:", err.response?.data || err.message);
-        setUser(null);
+        setUser((prev) => prev ?? null);
       })
       .finally(() => {
         setLoading(false)
