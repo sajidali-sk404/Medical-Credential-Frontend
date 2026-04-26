@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
     logout,                                  // call from navbar or any button
     isAdmin: user?.role === "admin",        // quick boolean for conditionals
     isClient: user?.role === "client",       // quick boolean for conditionals
-    isLoggedIn: !!user,                      // simple truthy check
+    isLoggedIn: !user,                      // simple truthy check
   }
 
   return (

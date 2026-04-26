@@ -8,7 +8,7 @@ import { AdminDashboardSidebar } from "../../modules/admin-dashboard/ui/componen
 
 
 export default function AdminLayout({ children }) {
-    const { loading, isAdmin } = useAuth()
+    const { user, loading, isAdmin } = useAuth()
     const router = useRouter()
 
     useEffect(() => {

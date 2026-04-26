@@ -9,10 +9,15 @@ import api from "../../../../lib/axios";
 
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState({
-    total: 0, pending: 0, in_review: 0,
-    approved: 0, rejected: 0,
-    open_tickets: 0, weekly_change: 0,
-    approval_rate: 0, critical_count: 0,
+    total: 0,
+    pending: 0,
+    in_review: 0,
+    approved: 0,
+    rejected: 0,
+    open_tickets: 0,
+    weekly_change: 0,
+    approval_rate: 0,
+    critical_count: 0,
   });
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,36 +57,36 @@ export default function AdminDashboardPage() {
           icon="/filebage.svg"
           label="Total submitted"
           value={stats?.total}
-          subLabel={`${stats.weekly_change >= 0 ? "+" : ""}${stats.weekly_change}% from last week`} color={stats.weekly_change >= 0 ? "success" : "danger"} 
-          />
+          subLabel={`${stats.weekly_change >= 0 ? "+" : ""}${stats.weekly_change}% from last week`} color={stats.weekly_change >= 0 ? "success" : "danger"}
+        />
 
         <StatCard
           icon="/greentik.svg"
           label="Approved"
           value={stats?.approved}
           subLabel={`${stats.approval_rate}% Approval Rate`}
-          color="success" 
-          />
+          color="success"
+        />
 
         <StatCard
           icon="/pendingfile.svg"
           label="Pending"
           value={stats?.pending}
           subLabel="Avg 24 hour response"
-          color="warning" 
-          />
+          color="warning"
+        />
         <StatCard
           icon="/rejectedFile.svg"
           label="Rejected" value={stats?.rejected}
-          color="danger" 
-          />
+          color="danger"
+        />
         <StatCard
           icon="/openticketsfile.svg"
           label="Open tickets"
           value={stats?.open_tickets}
           subLabel={stats.critical_count > 0 ? `${stats.critical_count} Critical status` : "All clear"}
-          color={stats.critical_count > 0 ? "danger" : "success"} 
-          />
+          color={stats.critical_count > 0 ? "danger" : "success"}
+        />
       </div>
 
       {/* Recent Requests */}
