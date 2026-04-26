@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { useSidebar } from "@/components/ui/sidebar";
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 function LayoutContent({ children }) {
   const { toggleSidebar, state, isMobile } = useSidebar()
