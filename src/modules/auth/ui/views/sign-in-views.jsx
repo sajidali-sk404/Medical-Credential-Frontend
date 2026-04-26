@@ -37,10 +37,6 @@ export const SignInViews = () => {
         e.preventDefault()           // ← stops page reload
         e.stopPropagation()
 
-        console.log("Submit fired")  // ← check if this appears in console
-        console.log("Email:", email)
-        console.log("API URL:", process.env.NEXT_PUBLIC_API_URL)
-
         if (!email || !password) {
             setError("Email and password are required")
             return
@@ -50,10 +46,7 @@ export const SignInViews = () => {
         setError("")
 
         try {
-            console.log("Calling API...")
             const { data } = await api.post("/api/auth/login", { email, password })
-            console.log("Response:", data)
-
             Cookies.set("token", data.token, {
                 expires: 7,
                 secure: true,
@@ -61,7 +54,6 @@ export const SignInViews = () => {
             })
 
             setMessage("Login successful! Redirecting...")
-            console.log("User data:", data.user)
             login(data.user)
             await new Promise((r) => setTimeout(r, 300));
 
@@ -71,9 +63,6 @@ export const SignInViews = () => {
                 router.push("/dashboard")
             }
         } catch (err) {
-            console.log("Full error:", err)
-            console.log("Response status:", err.response?.status)
-            console.log("Response data:", err.response?.data)
             setError(err.response?.data?.message || err.message || "Login failed")
         } finally {
             setLoading(false)

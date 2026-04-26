@@ -4,11 +4,14 @@ import { DashboardSidebar } from "../../../modules/dashboard/ui/components/dashb
 import { useAuth } from "../../../../context/AuthContext"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { useSidebar } from "@/components/ui/sidebar";
+import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 
 
 
 export default function ClientLayout({ children }) {
   const { user, loading, isClient } = useAuth()
+  const { toggleSidebar, state } = useSidebar();
   const router = useRouter()
 
   useEffect(() => {
@@ -34,6 +37,9 @@ export default function ClientLayout({ children }) {
   return (
     <SidebarProvider>
       <DashboardSidebar>
+        <Button className="size-4" variant="outline" onClick={toggleSidebar}>
+          {(state === "collapsed" || isMobile) ? <PanelLeftOpenIcon className="size-4" /> : <PanelLeftCloseIcon className="size-4" />}
+        </Button>
         {children}
       </DashboardSidebar>
     </SidebarProvider>

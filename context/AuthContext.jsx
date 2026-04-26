@@ -15,15 +15,11 @@ export function AuthProvider({ children }) {
   const router = useRouter()
 
   useEffect(() => {
-    console.log("Checking session...")
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => {
         setUser(data)  // user object or null
-        console.log("Session user:", data)
-        console.log("Session active for user:", data?.name)
       })
       .catch((err) => {
-        console.log("No session:", err.response?.data || err.message);
         setUser((prev) => prev ?? null);
       })
       .finally(() => {
