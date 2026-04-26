@@ -1,18 +1,24 @@
-// app/(client)/layout.jsx — temporary test
-"use client"
-import { useEffect } from "react"
+"use client";
+import { SidebarProvider } from "@/components/ui/sidebar"
+import { DashboardSidebar } from "@/modules/dashboard/ui/components/dashboard-sidebar"
 import { useAuth } from "../../../../context/AuthContext"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+
+
+
 export default function ClientLayout({ children }) {
   const { user, loading, isClient } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
     if (loading) return
-    if (!user)     router.replace("/sign-in")
-    if (!isClient) router.replace("/admin/dashboard")
+    if (!user) { router.replace("/sign-in"); return }
+    if (!isClient) { router.replace("/admin/dashboard"); return }
   }, [user, loading, isClient])
 
+  // ✅ Only block UI while loading
+  // Always show loader — never white screen
   if (loading || !user) return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <p style={{ fontSize: 14, color: "#6b8b8b" }}>Loading...</p>
@@ -25,10 +31,11 @@ export default function ClientLayout({ children }) {
     </div>
   )
 
-  // ← No DashboardSidebar — just render children directly
   return (
-    <div style={{ minHeight: "100vh", background: "#f8faf9", padding: 32 }}>
-      {children}
-    </div>
+    <SidebarProvider>
+      <DashboardSidebar>
+        {children}
+      </DashboardSidebar>
+    </SidebarProvider>
   )
 }
