@@ -18,12 +18,22 @@ export function AuthProvider({ children }) {
   // If the cookie exists and is valid, /api/auth/me returns the user.
   // If expired or missing, it returns 401 and we set user to null.
   useEffect(() => {
-    api.get("/api/auth/me", { withCredentials: true })
+    console.log("Checking session...")
+    api.get("/api/auth/me", {
+      headers: {
+        "Cache-Control": "no-cache",   // ← prevents 304
+        "Pragma": "no-cache",
+      }
+    })
       .then(({ data }) => {
+        console.log("Session user:", data)
         setUser(data.user)  // user object or null
         console.log("Session active for user:", data.user?.email || "No user")
       })
-      .catch(() => console.log("No active session"))
+      .catch((err) => {
+        console.log("No session:", err.response?.status);
+        setUser(null);
+      })
       .finally(() => {
         setLoading(false)
       })

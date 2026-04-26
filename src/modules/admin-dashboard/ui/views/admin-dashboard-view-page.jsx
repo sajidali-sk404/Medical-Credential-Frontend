@@ -8,7 +8,12 @@ import api from "@/lib/axios";
 
 
 export default function AdminDashboardPage() {
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState({
+    total: 0, pending: 0, in_review: 0,
+    approved: 0, rejected: 0,
+    open_tickets: 0, weekly_change: 0,
+    approval_rate: 0, critical_count: 0,
+  });
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
