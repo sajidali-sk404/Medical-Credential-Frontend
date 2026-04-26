@@ -32,7 +32,14 @@ export const DashboardSidebar = ({ children }) => {
         <div className="flex h-screen w-full">
             <Sidebar>
                 <SidebarHeader>
-                    <h2>Dashboard</h2>
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-md bg-[#1D9E75] flex items-center justify-center">
+                            <span className="text-white text-[13px] font-bold">C</span>
+                        </div>
+                        <span className="text-white font-semibold text-[15px] tracking-[-0.01em]">
+                            CredFlow
+                        </span>
+                    </div>
                 </SidebarHeader>
                 <div className="px-4 py-2">
                     <Separator className="opacity-50 text-[#5D6B68]" />
