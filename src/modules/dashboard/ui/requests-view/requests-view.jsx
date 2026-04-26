@@ -1,9 +1,9 @@
 "use client"
 import { useState, useEffect } from "react"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { RequestsTable } from "@/components/dashboard/RequestsTable"
-import { Button } from "@/components/ui/button"
-import api from "@/lib/axios"
+import { PageHeader } from "../../../../components/layout/PageHeader"
+import { RequestsTable } from "../../../../components/dashboard/RequestsTable"
+import { Button } from "../../../../components/ui/button"
+import api from "../../../../lib/axios"
 import Link from "next/link"
 
 const STATUS_OPTS = ["", "pending", "in_review", "approved", "rejected"]

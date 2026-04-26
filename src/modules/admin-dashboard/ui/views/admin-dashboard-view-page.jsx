@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { StatCard } from "@/components/dashboard/StatCard";
-import { RequestsTable } from "@/components/dashboard/RequestsTable";
-import { Card, CardContent } from "@/components/ui/card";
-import api from "@/lib/axios";
+import { PageHeader } from "../../../../components/layout/PageHeader";
+import { StatCard } from "../../../../components/dashboard/StatCard";
+import { RequestsTable } from "../../../../components/dashboard/RequestsTable";
+import { Card, CardContent } from "../../../../components/ui/card";
+import api from "../../../../lib/axios";
 
 
 export default function AdminDashboardPage() {

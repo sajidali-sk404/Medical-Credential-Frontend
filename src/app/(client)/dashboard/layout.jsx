@@ -1,6 +1,6 @@
 "use client";
-import { SidebarProvider } from "@/components/ui/sidebar"
-import { DashboardSidebar } from "@/modules/dashboard/ui/components/dashboard-sidebar"
+import { SidebarProvider } from "../../..//components/ui/sidebar";
+import { DashboardSidebar } from "../../../modules/dashboard/ui/components/dashboard-sidebar";
 import { useAuth } from "../../../../context/AuthContext"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"

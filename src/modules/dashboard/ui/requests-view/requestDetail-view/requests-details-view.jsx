@@ -1,11 +1,11 @@
 "use client"
 import { useState, useEffect } from "react"
 import { use } from "react"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { Badge } from "@/components/ui/Badge"
-import { StatusTimeline } from "@/components/StatusTimeLine"
-import { DocumentUpload } from "@/components/DocumentUpload"
-import api from "@/lib/axios"
+import { PageHeader } from "../../../../../components/layout/PageHeader"
+import { Badge } from "../../../../../components/ui/Badge"
+import { StatusTimeline } from "../../../../../components/StatusTimeLine"
+import { DocumentUpload } from "../../../../../components/DocumentUpload"
+import api from "../../../../../lib/axios"
 
 export const RequestDetailViewPage = ({ params }) => {
     const { id } = use(params)

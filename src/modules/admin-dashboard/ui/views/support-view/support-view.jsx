@@ -1,10 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { Badge } from "@/components/ui/Badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import api from "@/lib/axios"
+import { PageHeader } from "../../../../../components/layout/PageHeader"
+import { Badge } from "../../../../../components/ui/Badge"
+import { Button } from "../../../../../components/ui/button"
+import { Card, CardContent } from "../../../../../components/ui/card"
+import api from "../../../../../lib/axios"
 
 export const AdminSupportViewPage = () => {
   const [tickets, setTickets] = useState([])

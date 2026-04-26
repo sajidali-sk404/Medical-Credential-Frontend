@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, Shield, Phone, User, MapPinHouse, Building2 } from "lucide-react";
-import api from "@/lib/axios";
+import api from "../../../../lib/axios";
 import { useRouter } from 'next/navigation'
-import { Input } from "@/components/ui/input";
+import { Input } from "../../../../components/ui/input";
 
 
 export const SignUpViews = () => {

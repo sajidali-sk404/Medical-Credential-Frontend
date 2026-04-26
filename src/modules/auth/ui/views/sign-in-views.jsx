@@ -6,8 +6,8 @@ import Cookies from "js-cookie"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, Shield, CheckSquare, Square } from "lucide-react";
-import api from "@/lib/axios";
-import { Input } from "@/components/ui/input";
+import api from "../../../../lib/axios";
+import { Input } from "../../../../components/ui/input";
 import { useRouter } from "next/navigation";
 
 export const SignInViews = () => {

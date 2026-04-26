@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { PageHeader } from "../../../../../components/layout/PageHeader";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import api from "@/lib/axios";
+import { Input } from "../../../../../components/ui/input";
+import { Card, CardContent } from "../../../../../components/ui/card";
+import api from "../../../../../lib/axios";
 
 export const AdminClientsViewPage = () => {
   const [clients, setClients] = useState([]);

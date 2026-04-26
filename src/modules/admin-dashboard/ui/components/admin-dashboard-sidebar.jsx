@@ -3,10 +3,10 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupConte
 import { LayoutDashboard, FileText, ShieldQuestionMark, Users } from 'lucide-react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../../lib/utils";
 import { DashboardUserButton } from "../../../dashboard/ui/components/dashboard-user-button";
-import { Separator } from "@/components/ui/separator";
-import { Children } from "react";
+import { Separator } from "../../../../components/ui/separator";
+
 
 const adminRoutes = [
     {

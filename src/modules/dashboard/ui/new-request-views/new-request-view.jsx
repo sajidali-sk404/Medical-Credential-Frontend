@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import api from "@/lib/axios"
-import { RequestForm } from "@/components/requests/RequestForm"
+import api from "../../../../lib/axios"
+import { RequestForm } from "../../../../components/requests/RequestForm"
 
 export const NewRequestViewPage = () => {
     const router = useRouter()

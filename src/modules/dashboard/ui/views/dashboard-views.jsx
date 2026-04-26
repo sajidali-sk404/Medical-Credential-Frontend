@@ -1,11 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
 import { useAuth } from "../../../../../context/AuthContext"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { StatCard } from "@/components/dashboard/StatCard"
-import { RequestsTable } from "@/components/dashboard/RequestsTable"
-import { Button } from "@/components/ui/button"
-import api from "@/lib/axios"
+import { PageHeader } from "../../../../components/layout/PageHeader"
+import { StatCard } from "../../../../components/dashboard/StatCard"
+import { RequestsTable } from "../../../../components/dashboard/RequestsTable"
+import api from "../../../../lib/axios"
 import Link from "next/link"
 
 

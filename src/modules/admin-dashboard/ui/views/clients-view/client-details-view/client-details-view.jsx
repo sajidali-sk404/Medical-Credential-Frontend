@@ -1,12 +1,11 @@
 "use client"
-import { useState, useEffect } from "react"
-import { use } from "react"
+import { useState, useEffect, use } from "react"
 import Link from "next/link"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { Badge } from "@/components/ui/Badge"
-import { StatCard } from "@/components/dashboard/StatCard"
-import { RequestsTable } from "@/components/dashboard/RequestsTable"
-import api from "@/lib/axios"
+import { PageHeader } from "../../../../../../components/layout/PageHeader"
+import { Badge } from "../../../../../../components/ui/Badge"
+import { StatCard } from "../../../../../../components/dashboard/StatCard"
+import { RequestsTable } from "../../../../../../components/dashboard/RequestsTable"
+import api from "../../../../../../lib/axios"
 
 export default function AdminClientDetailViewPage({ params }) {
   const { id } = use(params)
