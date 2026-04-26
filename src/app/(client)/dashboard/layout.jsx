@@ -36,10 +36,10 @@ export default function ClientLayout({ children }) {
 
   return (
     <SidebarProvider>
-      <DashboardSidebar>
         <Button className="size-4" variant="outline" onClick={toggleSidebar}>
           {(state === "collapsed" || isMobile) ? <PanelLeftOpenIcon className="size-4" /> : <PanelLeftCloseIcon className="size-4" />}
         </Button>
+      <DashboardSidebar>
         {children}
       </DashboardSidebar>
     </SidebarProvider>

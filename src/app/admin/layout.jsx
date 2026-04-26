@@ -32,10 +32,10 @@ export default function AdminLayout({ children }) {
   )
 
   return <SidebarProvider>
+    <Button className="size-4" variant="outline" onClick={toggleSidebar}>
+      {(state === "collapsed" || isMobile) ? <PanelLeftOpenIcon className="size-4" /> : <PanelLeftCloseIcon className="size-4" />}
+    </Button>
     <AdminDashboardSidebar>
-      <Button className="size-4" variant="outline" onClick={toggleSidebar}>
-        {(state === "collapsed" || isMobile) ? <PanelLeftOpenIcon className="size-4" /> : <PanelLeftCloseIcon className="size-4" />}
-      </Button>
       {children}
     </AdminDashboardSidebar>
   </SidebarProvider>
