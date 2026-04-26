@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
       .then(({ data }) => {
         console.log("Session user:", data)
         setUser(data.user)  // user object or null
-        console.log("Session active for user:", data.user?.email || "No user")
+        console.log("Session active for user:", data.user?.name || "No user")
       })
       .catch((err) => {
         console.log("No session:", err.response?.status);

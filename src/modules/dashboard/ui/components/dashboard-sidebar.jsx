@@ -1,6 +1,6 @@
 "use client";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { LayoutDashboard, FileText, ShieldQuestionMark } from 'lucide-react';
+import { LayoutDashboard, FileText, HelpCircle } from 'lucide-react'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -20,7 +20,7 @@ const clientRoutes = [
         href: "/dashboard/requests",
     },
     {
-        icon: ShieldQuestionMark,
+        icon: HelpCircle,
         label: "Contact Support",
         href: "/dashboard/support",
     }
