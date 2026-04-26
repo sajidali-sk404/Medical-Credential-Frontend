@@ -19,12 +19,7 @@ export function AuthProvider({ children }) {
   // If expired or missing, it returns 401 and we set user to null.
   useEffect(() => {
     console.log("Checking session...")
-    api.get("/api/auth/me", {
-      headers: {
-        "Cache-Control": "no-cache",   // ← prevents 304
-        "Pragma": "no-cache",
-      }
-    })
+    api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => {
         console.log("Session user:", data)
         setUser(data.user)  // user object or null
