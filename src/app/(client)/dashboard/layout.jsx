@@ -7,11 +7,28 @@ import { useEffect } from "react"
 import { useSidebar } from "@/components/ui/sidebar";
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 
+function LayoutContent({ children }) {
+  const { toggleSidebar, state, isMobile } = useSidebar()
 
+  return (
+    <>
+      <div className="p-2">
+        <Button variant="outline" size="icon" onClick={toggleSidebar}>
+          {(state === "collapsed" || isMobile)
+            ? <PanelLeftOpenIcon className="size-4" />
+            : <PanelLeftCloseIcon className="size-4" />}
+        </Button>
+      </div>
+
+      <DashboardSidebar>
+        {children}
+      </DashboardSidebar>
+    </>
+  )
+}
 
 export default function ClientLayout({ children }) {
   const { user, loading, isClient } = useAuth()
-  const { toggleSidebar, state } = useSidebar();
   const router = useRouter()
 
   useEffect(() => {
@@ -36,12 +53,9 @@ export default function ClientLayout({ children }) {
 
   return (
     <SidebarProvider>
-        <Button className="size-4" variant="outline" onClick={toggleSidebar}>
-          {(state === "collapsed" || isMobile) ? <PanelLeftOpenIcon className="size-4" /> : <PanelLeftCloseIcon className="size-4" />}
-        </Button>
-      <DashboardSidebar>
+      <LayoutContent>
         {children}
-      </DashboardSidebar>
+      </LayoutContent>
     </SidebarProvider>
   )
 }
