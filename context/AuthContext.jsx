@@ -14,16 +14,13 @@ export function AuthProvider({ children }) {
 
   const router = useRouter()
 
-  // ── On every page load — check if session cookie is still valid ──
-  // If the cookie exists and is valid, /api/auth/me returns the user.
-  // If expired or missing, it returns 401 and we set user to null.
   useEffect(() => {
     console.log("Checking session...")
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => {
         console.log("Session user:", data)
         setUser(data.user)  // user object or null
-        console.log("Session active for user:", data.user?.name || "No user")
+        console.log("Session active for user:", data.user.name)
       })
       .catch((err) => {
         console.log("No session:", err.response?.status);
