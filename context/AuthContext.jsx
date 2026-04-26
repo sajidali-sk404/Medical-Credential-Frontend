@@ -18,12 +18,12 @@ export function AuthProvider({ children }) {
     console.log("Checking session...")
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => {
-        console.log("Session user:", data)
         setUser(data.user)  // user object or null
-        console.log("Session active for user:", user?.name)
+        console.log("Session user:", data)
+        console.log("Session active for user:", data.user?.name)
       })
       .catch((err) => {
-        console.log("No session:", err.response?.status);
+        console.log("No session:", err.response?.data || err.message);
         setUser(null);
       })
       .finally(() => {
