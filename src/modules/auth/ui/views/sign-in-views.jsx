@@ -53,13 +53,8 @@ export const SignInViews = () => {
             console.log("Calling API...")
             const { data } = await api.post("/api/auth/login", { email, password })
             console.log("Response:", data)
-
-            Cookies.set("token", data.token, {
-                expires: 7,
-                secure: true,
-                sameSite: "None",
-            })
             setMessage("Login successful! Redirecting...")
+            console.log("User data:", data.user)
             login(data.user)
 
 

@@ -18,9 +18,9 @@ export function AuthProvider({ children }) {
     console.log("Checking session...")
     api.get("/api/auth/me", { withCredentials: true })
       .then(({ data }) => {
-        setUser(data.user)  // user object or null
+        setUser(data)  // user object or null
         console.log("Session user:", data)
-        console.log("Session active for user:", data.user?.name)
+        console.log("Session active for user:", data?.name)
       })
       .catch((err) => {
         console.log("No session:", err.response?.data || err.message);
