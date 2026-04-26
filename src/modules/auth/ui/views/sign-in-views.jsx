@@ -59,13 +59,14 @@ export const SignInViews = () => {
                 secure: true,
                 sameSite: "None",
             })
-
+            setMessage("Login successful! Redirecting...")
             login(data.user)
 
+
             if (data.user.role === "admin") {
-                window.location.href = "/admin/dashboard"
+                router.push("/admin/dashboard")
             } else {
-                window.location.href = "/dashboard"
+                router.push("/dashboard")
             }
         } catch (err) {
             console.log("Full error:", err)
