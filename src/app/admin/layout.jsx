@@ -17,7 +17,17 @@ export default function AdminLayout({ children }) {
         }
     }, [loading, isAdmin])
 
-    if (loading || !isAdmin) return null
+     if (loading || !user) return (
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <p style={{ fontSize: 14, color: "#6b8b8b" }}>Loading...</p>
+    </div>
+  )
+
+  if (!isAdmin) return (
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <p style={{ fontSize: 14, color: "#6b8b8b" }}>Redirecting...</p>
+    </div>
+  )
 
     return <SidebarProvider>
         <AdminDashboardSidebar>
