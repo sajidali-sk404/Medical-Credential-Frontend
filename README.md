@@ -87,7 +87,7 @@ client/
 
 ```bash
 git clone https://github.com/your-username/credflow-frontend.git
-cd credflow-frontend
+cd Medical-Credential-Frontend
 npm install
 ```
 
@@ -102,7 +102,7 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 For production:
 
 ```env
-NEXT_PUBLIC_API_URL=https://medical-credential-backend.onrender.com
+NEXT_PUBLIC_API_URL=https://medical-credential-backend.yourService.com
 ```
 
 ### 3. Run development server
@@ -151,7 +151,7 @@ App runs at `http://localhost:3000`
 
 ## Key Files
 
-### `lib/api.js` — Axios instance
+### `lib/axios.js` — Axios instance
 
 ```js
 import axios   from "axios"
