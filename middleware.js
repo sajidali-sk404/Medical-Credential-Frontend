@@ -7,12 +7,13 @@ export function middleware(request) {
   const { pathname } = request.nextUrl
 
   const isAuthPage = pathname.startsWith("/sign-in") || pathname.startsWith("/sign-up")
-  const isClientPage = pathname.startsWith("/dashboard") || pathname.startsWith("/dashboard/requests") || pathname.startsWith("/dashboard/new-request") || pathname.startsWith("/dashboard/support")
-  const isAdminPage = pathname.startsWith("/admin/dashboard") || pathname.startsWith("/admin/requests") || pathname.startsWith("/admin/clients")
+  const isClientPage = pathname.startsWith("/dashboard")
+  const isAdminPage = pathname.startsWith("/admin")
+  const isProviderPage = pathname.startsWith("/provider")
 
   // Not logged in
   if (!token) {
-    if (isClientPage || isAdminPage) {
+    if (isClientPage || isAdminPage || isProviderPage) {
       return NextResponse.redirect(new URL("/sign-in", request.url))
     }
     return NextResponse.next()
@@ -27,21 +28,25 @@ export function middleware(request) {
     return NextResponse.redirect(new URL("/sign-in", request.url))
   }
 
-  // Client trying admin routes
-  if (role === "client" && isAdminPage) {
+  // Role restriction checks
+  if (role === "client" && (isAdminPage || isProviderPage)) {
     return NextResponse.redirect(new URL("/dashboard", request.url))
   }
 
-  // Admin trying client routes
-  if (role === "admin" && isClientPage) {
+  if (role === "admin" && (isClientPage || isProviderPage)) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url))
+  }
+
+  if (role === "provider" && (isClientPage || isAdminPage)) {
+    return NextResponse.redirect(new URL("/provider/dashboard", request.url))
   }
 
   // Already logged in visiting auth pages
   if (isAuthPage) {
-    return NextResponse.redirect(
-      new URL(role === "admin" ? "/admin/dashboard" : "/dashboard", request.url)
-    )
+    let target = "/dashboard"
+    if (role === "admin") target = "/admin/dashboard"
+    if (role === "provider") target = "/provider/dashboard"
+    return NextResponse.redirect(new URL(target, request.url))
   }
 
   return NextResponse.next()

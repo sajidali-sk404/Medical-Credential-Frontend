@@ -4,14 +4,16 @@ import { PageHeader } from "../../../../components/layout/PageHeader"
 import { Button } from "../../../../components/ui/button"
 import { Badge } from "../../../../components/ui/Badge"
 import api from "../../../../lib/axios"
+import { validateTicketForm, isValid } from "@/lib/validation"
 
-export const  SupportViewPage = () => {
+export const SupportViewPage = () => {
   const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
   const [form, setForm] = useState({ subject: "", message: "" })
+  const [fieldErrors, setFieldErrors] = useState({})
 
   const fetchTickets = () => {
     api.get("/api/requests/support/my")
@@ -27,6 +29,10 @@ export const  SupportViewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const errors = validateTicketForm(form)
+    setFieldErrors(errors)
+    if (!isValid(errors)) return
+
     if (!form.subject.trim() || !form.message.trim()) {
       setError("Please fill in all fields")
       return
@@ -38,6 +44,7 @@ export const  SupportViewPage = () => {
     try {
       await api.post("/api/requests/support", form)
       setForm({ subject: "", message: "" })
+      setFieldErrors({})
       setSuccess(true)
       setTimeout(() => setSuccess(false), 3000)
       fetchTickets()
