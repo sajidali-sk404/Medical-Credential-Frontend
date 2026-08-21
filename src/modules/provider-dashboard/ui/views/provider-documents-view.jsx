@@ -6,30 +6,46 @@ import Link from "next/link";
 import api from "@/lib/axios";
 
 export default function ProviderDocumentsView() {
-  const [requests, setRequests] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    api.get("/api/provider/requests")
-      .then(({ data }) => setRequests(data.requests || []))
-      .catch(err => console.error("Error fetching provider documents:", err))
-      .finally(() => setLoading(false));
+    const fetchDocs = async () => {
+      try {
+        // Try dedicated documents endpoint
+        const { data } = await api.get("/api/provider/documents");
+        if (data?.documents) {
+          setDocuments(data.documents);
+          return;
+        }
+      } catch (err) {
+        // Silently fallback to provider requests endpoint
+      }
+
+      try {
+        const { data } = await api.get("/api/provider/requests");
+        const allDocs = (data.requests || []).flatMap((req) =>
+          (req.documents || []).map((doc) => ({
+            ...doc,
+            request_id: req._id,
+            provider_name: req.provider_name,
+            specialty: req.specialty,
+            status: req.status
+          }))
+        );
+        setDocuments(allDocs);
+      } catch (err) {
+        console.error("Failed to load provider documents:", err);
+      }
+    };
+
+    fetchDocs().finally(() => setLoading(false));
   }, []);
 
-  const allDocuments = requests.flatMap((req) =>
-    (req.documents || []).map((doc) => ({
-      ...doc,
-      request_id: req._id,
-      provider_name: req.provider_name,
-      specialty: req.specialty,
-      status: req.status
-    }))
-  );
-
-  const filteredDocs = allDocuments.filter(d =>
-    d.file_name.toLowerCase().includes(search.toLowerCase()) ||
-    d.specialty?.toLowerCase().includes(search.toLowerCase())
+  const filteredDocs = documents.filter(d =>
+    (d.file_name || "").toLowerCase().includes(search.toLowerCase()) ||
+    (d.specialty || "").toLowerCase().includes(search.toLowerCase())
   );
 
   return (

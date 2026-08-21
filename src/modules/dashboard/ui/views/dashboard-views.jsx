@@ -62,27 +62,27 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1  md:grid-cols-2  lg:grid-cols-4 gap-3 mb-7">
         <StatCard
-          icon="./filebage.svg"
+          icon="/filebage.svg"
           label="Total submitted"
           value={stats?.total}
           subLabel={`${stats.weekly_change >= 0 ? "+" : ""}${stats.weekly_change}% from last week`} color={stats.weekly_change >= 0 ? "success" : "danger"} />
 
         <StatCard
-          icon="./greentik.svg"
+          icon="/greentik.svg"
           label="Approved"
           value={stats?.approved}
           subLabel={`${stats.approval_rate}% Approval Rate`}
           color="success" />
 
         <StatCard
-          icon="./pendingfile.svg"
+          icon="/pendingfile.svg"
           label="Pending"
           value={stats?.pending}
           subLabel="Avg 24 hour response"
           color="warning" />
 
         <StatCard
-          icon="./rejectedFile.svg"
+          icon="/rejectedFile.svg"
           label="Rejected"
           value={stats?.rejected}
           subLabel={``}

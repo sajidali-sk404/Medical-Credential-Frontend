@@ -123,7 +123,7 @@ export const SignInViews = () => {
                 </div>
                 <div className="relative z-10 p-8 flex items-center gap-3">
                     <div className="flex -space-x-2">
-                        <img src="./docter.svg" alt="doctor logo" />
+                        <img src="/docter.svg" alt="doctor logo" />
                     </div>
                 </div>
             </div>

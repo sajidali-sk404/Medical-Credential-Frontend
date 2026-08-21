@@ -63,28 +63,28 @@ export default function ProviderDashboardView() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          icon="./filebage.svg"
+          icon="/filebage.svg"
           label="Total Verifications"
           value={stats?.total}
           subLabel="Assigned to your profile"
           color="info"
         />
         <StatCard
-          icon="./greentik.svg"
+          icon="/greentik.svg"
           label="Approved Credentials"
           value={stats?.approved}
           subLabel="Fully verified credentials"
           color="success"
         />
         <StatCard
-          icon="./pendingfile.svg"
+          icon="/pendingfile.svg"
           label="In Review / Pending"
           value={(stats?.pending || 0) + (stats?.in_review || 0)}
           subLabel="Awaiting admin action"
           color="warning"
         />
         <StatCard
-          icon="./filebage.svg"
+          icon="/filebage.svg"
           label="Uploaded Documents"
           value={stats?.document_count}
           subLabel="Medical licenses & certs"

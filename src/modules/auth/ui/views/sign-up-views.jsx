@@ -144,7 +144,7 @@ export const SignUpViews = () => {
                 </div>
 
                 <div className="relative z-10 p-8 flex items-center gap-3">
-                    <img src="./docter.svg" alt="doctor graphic" />
+                    <img src="/docter.svg" alt="doctor graphic" />
                 </div>
             </div>
 
